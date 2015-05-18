@@ -12,5 +12,8 @@ modules=s.moduleIds
 mod=s.get(modules[0])
 dic=s.parse(mod)
 reactions=dic['REACTION']
-for reac in reactions:
-    print(reactions[reac])
+#for reac in reactions:
+#    print(reactions[reac])
+
+teste=reactions["R01070"]
+string=teste.split(" ")
