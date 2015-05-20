@@ -22,6 +22,5 @@ modules=s.moduleIds
 #            dic_reac[reac]=string
 #    except KeyError:
 #        pass
-        
-        
+          
 print(s.parse(s.get(modules[0])))
