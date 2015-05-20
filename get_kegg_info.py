@@ -52,6 +52,7 @@ def teste3():
         comp=dic_reac[reac]
         for c in comp:
             if c not in gr.getNodes():
+                if c=="->":
             else:
                 gr.addEdge()
 
