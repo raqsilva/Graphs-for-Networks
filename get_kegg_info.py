@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from bioservices import KEGG
-s = KEGG()
-s.organism = "hsa"
 
 #x=s.pathwayIds
 #res = s.get(x[0])
 
-modules=s.moduleIds
 #dic_reac={}
 # pick one organism or just the module (cycle) you want to create the network from
 # each module corresponds a cycle, a pathway
@@ -23,4 +20,12 @@ modules=s.moduleIds
 #    except KeyError:
 #        pass
           
-print(s.parse(s.get(modules[0])))
+
+def teste():
+    s = KEGG()
+    s.organism = "hsa"
+    modules=s.moduleIds
+    print(s.parse(s.get(modules[0])))
+
+
+teste()
