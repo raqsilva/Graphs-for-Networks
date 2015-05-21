@@ -50,15 +50,41 @@ def teste3():
     gr=MyGraph()
     for reac in dic_reac:
         comp=dic_reac[reac]
-        for c in comp:
-            if c not in gr.getNodes():
-                if c=="->":
+        c=0
+        if comp[c+1]=="+":
+            s="".join(comp[c]+comp[c+2])
+            if s not in gr.getNodes():
+                gr.addVertex(s)
+            try:
+                if comp[c+3]=="->":
+                    if comp[c+4]=="+":
+                        x="".join(comp[c]+comp[c+2])
+                        if x not in gr.getNodes():
+                            gr.addVertex(x)
+                            gr.addEdge(s,x)
+                    else:
+                        gr.addEdge(s,comp[c+4])
+            except IndexError:
+                pass
+        elif comp[c+1]=="->":
+            if comp[c] not in gr.getNodes():
+                gr.addVertex(comp[c])
+            try:
+                if comp[c+3]=="+":
+                    s="".join(comp[c+2]+comp[c+4])
+                    if s not in gr.getNodes():
+                        gr.addVertex(s)
+                        gr.addEdge(comp[c],s)
+            except IndexError:
+                pass
             else:
-                gr.addEdge()
+                gr.addEdge(comp[c],comp[c+2])
+    return gr.printGraph()
 
 
 
-print(teste2())
+#print(teste2())
+teste3()
 
 
 
