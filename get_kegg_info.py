@@ -51,49 +51,41 @@ def teste3():
     for reac in dic_reac:
         comp=dic_reac[reac]
         c=0
-        if comp[c+1]=="+":
-            s="".join(comp[c]+comp[c+2])
-            if s not in gr.getNodes():
-                gr.addVertex(s)
+        if comp[c+1]=="+": #precisa de ser mudado
             try:
-                if comp[c+3]=="->":
-                    if comp[c+4]=="+":
-                        x="".join(comp[c]+comp[c+2])
-                        if x not in gr.getNodes():
-                            gr.addVertex(x)
-                            gr.addEdge(s,x)
-                    else:
-                        gr.addEdge(s,comp[c+4])
+                comp[c+5]!="+"
+                s2=str(comp[c+4])+"+"+str(comp[c+6])
+                gr.addEdge(s2,comp[c+4])
             except IndexError:
-                pass
+                s=str(comp[c])+"+"+str(comp[c+2])
+                gr.addEdge(s,comp[c+4])     
         elif comp[c+1]=="->":
-            if comp[c] not in gr.getNodes():
-                gr.addVertex(comp[c])
             try:
-                if comp[c+3]=="+":
-                    s="".join(comp[c+2]+comp[c+4])
-                    if s not in gr.getNodes():
-                        gr.addVertex(s)
-                        gr.addEdge(comp[c],s)
+                comp[c+3]=="+"
+                s=str(comp[c+2])+"+"+str(comp[c+4])
+                gr.addEdge(comp[c],s)
             except IndexError:
-                pass
-            else:
-                gr.addEdge(comp[c],comp[c+2])
+                gr.addEdge(comp[c],comp[c+2])              
     return gr.printGraph()
 
+### RESULTADO do teste 3 ####
+
+#C00197->['C00631']
+#C00668->['C05345']
+#C00111->['C00118']
+#C00236->['C00197']
+#C00074->['C00022']
+#C00118->['C00197', 'C00236']
+#C00267->['C00668']
+#C00111+C00118->[]
+#C00022->[]
+#C05378->['C00111+C00118']
+#C00631->['C00074']
+#C05345->['C05378']
 
 
 #print(teste2())
 teste3()
-
-
-
-
-
-
-
-
-
 
 
 
