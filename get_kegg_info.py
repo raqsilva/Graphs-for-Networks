@@ -22,9 +22,12 @@ from MyGraph import MyGraph
           
 def teste():
     s = KEGG()
-    s.organism = "hsa"
-    modules=s.moduleIds
+    s.organism = "hsa" #human
+    modules=s.moduleIds #pathway modules
     dic=s.parse(s.get(modules[0]))
+    compounds=dic["COMPOUND"]#dictionary with the names of the compounds {'C00074': 'Phosphoenolpyruvate',.....
+    pathway=dic["PATHWAY"] # {'map00010': 'Glycolysis / Gluconeogenesis',......
+    module_name=dic["NAME"] #['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']}
     return dic
 
 
@@ -33,7 +36,7 @@ def teste2():
     s.organism = "hsa"
     modules=s.moduleIds
     dic=s.parse(s.get(modules[0]))
-    reactions=dic['REACTION']
+    reactions=dic["REACTION"]
     dic_reac={}
     for reac in reactions:
         teste=reactions[reac]
@@ -44,7 +47,7 @@ def teste2():
                     # 'R01070': ['C05378', '->', 'C00111', '+', 'C00118'] 
  
 
-dic_reac=teste2()
+#dic_reac=teste2()
 
 def teste3():
     gr=MyGraph()
@@ -85,8 +88,8 @@ def teste3():
 
 
 #print(teste2())
-teste3()
-
+#teste3()
+print(teste())
 
 
 
