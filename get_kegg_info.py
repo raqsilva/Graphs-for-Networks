@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from bioservices import KEGG
 from MyGraph import MyGraph
+from MetabolicNetwork import MetabolicNetwork
 
 #x=s.pathwayIds
 #res = s.get(x[0])
@@ -22,7 +23,7 @@ from MyGraph import MyGraph
           
 def teste():
     s = KEGG()
-    s.organism = "hsa" #human
+    s.organism = "hsa" #Homo sapiens (human)
     modules=s.moduleIds #pathway modules
     dic=s.parse(s.get(modules[0]))
     compounds=dic["COMPOUND"]#dictionary with the names of the compounds {'C00074': 'Phosphoenolpyruvate',.....
@@ -35,7 +36,7 @@ def teste2():
     s = KEGG()
     s.organism = "hsa"
     modules=s.moduleIds
-    dic=s.parse(s.get(modules[0]))
+    dic=s.parse(s.get(modules[3]))
     reactions=dic["REACTION"]
     dic_reac={}
     for reac in reactions:
@@ -47,18 +48,19 @@ def teste2():
                     # 'R01070': ['C05378', '->', 'C00111', '+', 'C00118'] 
  
 
-#dic_reac=teste2()
 
 def teste3():
+    dic_reac=teste2()
     gr=MyGraph()
     for reac in dic_reac:
         comp=dic_reac[reac]
         c=0
-        if comp[c+1]=="+": #precisa de ser mudado
+        if comp[c+1]=="+": 
             try:
-                comp[c+5]!="+"
+                comp[c+5]=="+"
                 s2=str(comp[c+4])+"+"+str(comp[c+6])
-                gr.addEdge(s2,comp[c+4])
+                s3=str(comp[c])+"+"+str(comp[c+2])
+                gr.addEdge(s3,s2)
             except IndexError:
                 s=str(comp[c])+"+"+str(comp[c+2])
                 gr.addEdge(s,comp[c+4])     
@@ -87,9 +89,36 @@ def teste3():
 #C05345->['C05378']
 
 
-#print(teste2())
-#teste3()
-print(teste())
+print(teste2())
+teste3()
+#print(teste())
+
+
+def teste4():
+    s = KEGG()
+    s.organism = "hsa" #Homo sapiens (human)
+    modules=s.moduleIds #pathway modules
+    dic=s.parse(s.get(modules[0]))
+    compounds=dic["COMPOUND"]#dictionary with the names of the compounds {'C00074': 'Phosphoenolpyruvate',.....
+    pathway=dic["PATHWAY"] # {'map00010': 'Glycolysis / Gluconeogenesis',......
+    module_name=dic["NAME"] #['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']}
+    return dic
+
+
+#s = KEGG()
+#s.organism = "hsa" #Homo sapiens (human)
+#modules=s.moduleIds #pathway modules
+#dic=s.parse(s.get(modules[3]))
+#module_name=dic["NAME"][0]
+#reactions=dic["REACTION"]
+#if "Pentose phosphate cycle" in module_name:
+#    print(module_name)
+#else:
+#    print("haha")
+
+
+
+
 
 
 
