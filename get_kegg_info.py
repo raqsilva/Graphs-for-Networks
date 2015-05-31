@@ -47,8 +47,6 @@ def teste2():
                     # as the reactions occurs,'R01015': ['C00111', '->', 'C00118']
                     # 'R01070': ['C05378', '->', 'C00111', '+', 'C00118'] 
  
-
-
 def teste3():
     dic_reac=teste2()
     gr=MyGraph()
@@ -132,9 +130,41 @@ def teste6():
             dic_reac[reac]=string
     return dic_reac 
 
-print(teste6())
+
+#print(teste6())
 
 ##### search by module name or pathway modules IDs 
+
+
+def teste7():### reac-reac
+    dic_reac=teste6()
+    gr=MyGraph()
+    for k, v in dic_reac.items():
+        for r, m in dic_reac.items():
+            if v[len(v)-2] == "->":
+                if v[len(v)-1]==m[0]:
+                    gr.addEdge(k, r)
+            else:
+                s=str(v[len(v)-3])+"+"+str(v[len(v)-1])
+                try:
+                    s2=str(m[0])+"+"+str(m[2])
+                    if s == s2:
+                        gr.addEdge(k, r)
+                except IndexError:
+                    pass
+    return gr.printGraph()
+
+print(teste6())  
+teste7()
+
+
+
+
+
+
+
+
+
 
 
 
