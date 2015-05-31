@@ -154,15 +154,39 @@ def teste7():### reac-reac
                     pass
     return gr.printGraph()
 
+#print(teste6())  
+#teste7()
+
+
+def teste8():### reac-comp
+    dic_reac=teste6()
+    gr=MyGraph()
+    for k, v in dic_reac.items():
+        for r, m in dic_reac.items():
+            if v[len(v)-2] == "->":
+                if v[len(v)-1]==m[0]:
+                    sv="".join(v)
+                    sm="".join(m)
+                    gr.addEdge(k, sv)
+                    gr.addEdge(sv, r)
+                    gr.addEdge(r, sm)
+            else:
+                s=str(v[len(v)-3])+"+"+str(v[len(v)-1])
+                try:
+                    s2=str(m[0])+"+"+str(m[2])
+                    if s == s2:
+                        sv="".join(v)
+                        sm="".join(m)
+                        gr.addEdge(k, sv)
+                        gr.addEdge(sv, r)
+                        gr.addEdge(r, sm)
+                except IndexError:
+                    pass
+    return gr.printGraph()    
+  
+
 print(teste6())  
-teste7()
-
-
-
-
-
-
-
+teste8()
 
 
 

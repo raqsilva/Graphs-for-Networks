@@ -33,7 +33,7 @@ class MetabolicNetwork(MyGraph):
                         # 'R01015': ['C00111', '->', 'C00118']
                         # 'R01070': ['C05378', '->', 'C00111', '+', 'C00118']         
     
-    def c_c_graph(self):
+    def c_c_graph(self):### comp-comp
         dic_reac=self.comp_comp()
         gr=MyGraph()
         for reac in dic_reac:
@@ -58,9 +58,50 @@ class MetabolicNetwork(MyGraph):
         return gr.printGraph()
         
         
+    def r_r_graph(self):### reac-reac
+        dic_reac=self.comp_comp()
+        gr=MyGraph()
+        for k, v in dic_reac.items():
+            for r, m in dic_reac.items():
+                if v[len(v)-2] == "->":
+                    if v[len(v)-1]==m[0]:
+                        gr.addEdge(k, r)
+                else:
+                    s=str(v[len(v)-3])+"+"+str(v[len(v)-1])
+                    try:
+                        s2=str(m[0])+"+"+str(m[2])
+                        if s == s2:
+                            gr.addEdge(k, r)
+                    except IndexError:
+                        pass
+        return gr.printGraph()      
         
-        
-        
+
+    def r_c_graph(self):### reac-comp
+        dic_reac=self.comp_comp()
+        gr=MyGraph()
+        for k, v in dic_reac.items():
+            for r, m in dic_reac.items():
+                if v[len(v)-2] == "->":
+                    if v[len(v)-1]==m[0]:
+                        sv="".join(v)
+                        sm="".join(m)
+                        gr.addEdge(k, sv)
+                        gr.addEdge(sv, r)
+                        gr.addEdge(r, sm)
+                else:
+                    s=str(v[len(v)-3])+"+"+str(v[len(v)-1])
+                    try:
+                        s2=str(m[0])+"+"+str(m[2])
+                        if s == s2:
+                            sv="".join(v)
+                            sm="".join(m)
+                            gr.addEdge(k, sv)
+                            gr.addEdge(sv, r)
+                            gr.addEdge(r, sm)
+                    except IndexError:
+                        pass
+        return gr.printGraph()           
         
         
         
