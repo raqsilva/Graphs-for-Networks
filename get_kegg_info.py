@@ -89,8 +89,8 @@ def teste3():
 #C05345->['C05378']
 
 
-print(teste2())
-teste3()
+#print(teste2())
+#teste3()
 #print(teste())
 
 
@@ -105,24 +105,36 @@ def teste4():
     return dic
 
 
-#s = KEGG()
-#s.organism = "hsa" #Homo sapiens (human)
-#modules=s.moduleIds #pathway modules
-#dic=s.parse(s.get(modules[3]))
-#module_name=dic["NAME"][0]
-#reactions=dic["REACTION"]
-#if "Pentose phosphate cycle" in module_name:
-#    print(module_name)
-#else:
-#    print("haha")
+def teste5():
+    s = KEGG()
+    s.organism = "hsa" #Homo sapiens (human)
+    modules=s.moduleIds #pathway modules
+    dic=s.parse(s.get("M00627"))
+    module_name=dic["NAME"][0]
+    reactions=dic["REACTION"]
+    if "Pentose phosphate cycle" in module_name:
+        print(module_name)
+    else:
+        print("haha")
 
 
+def teste6():
+    s = KEGG()
+    s.organism = "hsa"
+    modules=["M00001", "M00002", "M00013", "M00034"]
+    dic_reac={}
+    for mod in modules:
+        dic=s.parse(s.get(mod))
+        reactions=dic["REACTION"]
+        for reac in reactions:
+            teste=reactions[reac]
+            string=teste.split(" ")
+            dic_reac[reac]=string
+    return dic_reac 
 
+print(teste6())
 
-
-
-
-
+##### search by module name or pathway modules IDs 
 
 
 
