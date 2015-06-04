@@ -15,9 +15,11 @@ class MetabolicNetwork(MyGraph):
         self.modules=modules
     
 
-    def comp_comp(self):
+    def kegg_dic(self):
         s = KEGG()
-        s.organism = "hsa"
+        s.organism = "hsa" # Homo Sapiens
+        if type(self.modules)!=list:
+            self.modules=s.moduleIds
         dic_reac={}
         for mod in self.modules:
             try:
@@ -34,7 +36,7 @@ class MetabolicNetwork(MyGraph):
                         # 'R01070': ['C05378', '->', 'C00111', '+', 'C00118']         
     
     def c_c_graph(self):### comp-comp
-        dic_reac=self.comp_comp()
+        dic_reac=self.kegg_dic()
         gr=MyGraph()
         for reac in dic_reac:
             comp=dic_reac[reac]
@@ -59,7 +61,7 @@ class MetabolicNetwork(MyGraph):
         
         
     def r_r_graph(self):### reac-reac
-        dic_reac=self.comp_comp()
+        dic_reac=self.kegg_dic()
         gr=MyGraph()
         for k, v in dic_reac.items():
             for r, m in dic_reac.items():
@@ -78,7 +80,7 @@ class MetabolicNetwork(MyGraph):
         
 
     def r_c_graph(self):### reac-comp
-        dic_reac=self.comp_comp()
+        dic_reac=self.kegg_dic()
         gr=MyGraph()
         for k, v in dic_reac.items():
             for r, m in dic_reac.items():
@@ -103,5 +105,30 @@ class MetabolicNetwork(MyGraph):
                         pass
         return gr.printGraph()           
         
-        
+
+
+
+if __name__ == "__main__":
+    mod=input("Which module(s) pathway you want to use to create network?")
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
         
