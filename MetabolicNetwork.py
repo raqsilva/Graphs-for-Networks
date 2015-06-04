@@ -15,7 +15,7 @@ class MetabolicNetwork(MyGraph):
         self.modules=modules
     
 
-    def kegg_dic(self):
+    def __kegg_dic(self):
         s = KEGG()
         s.organism = "hsa" # Homo Sapiens
         if type(self.modules)!=list:
@@ -36,7 +36,7 @@ class MetabolicNetwork(MyGraph):
                         # 'R01070': ['C05378', '->', 'C00111', '+', 'C00118']         
     
     def c_c_graph(self):### comp-comp
-        dic_reac=self.kegg_dic()
+        dic_reac=self.__kegg_dic()
         gr=MyGraph()
         for reac in dic_reac:
             comp=dic_reac[reac]
@@ -61,7 +61,7 @@ class MetabolicNetwork(MyGraph):
         
         
     def r_r_graph(self):### reac-reac
-        dic_reac=self.kegg_dic()
+        dic_reac=self.__kegg_dic()
         gr=MyGraph()
         for k, v in dic_reac.items():
             for r, m in dic_reac.items():
@@ -80,7 +80,7 @@ class MetabolicNetwork(MyGraph):
         
 
     def r_c_graph(self):### reac-comp
-        dic_reac=self.kegg_dic()
+        dic_reac=self.__kegg_dic()
         gr=MyGraph()
         for k, v in dic_reac.items():
             for r, m in dic_reac.items():
