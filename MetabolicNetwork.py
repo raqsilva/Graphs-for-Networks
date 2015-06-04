@@ -109,8 +109,28 @@ class MetabolicNetwork(MyGraph):
 
 
 if __name__ == "__main__":
-    mod=input("Which module(s) pathway you want to use to create network?")
-    
+    #mod=input("Which module(s) pathway you want to use to create a network?")
+    ans=True
+    modules=[]
+    while ans:
+        print("""
+        1.Add module ID (ex:M00627)
+        2.Add All Modules
+        3.All picked
+        
+        """)
+        ans=input("Choose an option? ")
+        if ans=="1":
+            md=str(input("Which module? "))
+            modules.append(md)
+        elif ans=="2":
+            modules=str("all")
+        elif ans=="3":
+            ans=False
+        else:
+            print("\nInvalid") 
+
+
 
 
 
