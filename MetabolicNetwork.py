@@ -9,21 +9,21 @@ from bioservices import KEGG
 #reaction-reaction networks R-R
 
 class MetabolicNetwork(MyGraph):
-    def __init__(self, networktype, modules):    
-        MyGraph.__init__(self,graph={})
-        self.net_type=networktype
+    def __init__(self, modules):    
+        MyGraph.__init__(self,{})
+        #self.net_type=networktype
         self.modules=modules
+        self.s = KEGG()
+        self.s.organism = "hsa" # Homo Sapiens
     
 
     def __kegg_dic(self):
-        s = KEGG()
-        s.organism = "hsa" # Homo Sapiens
         if type(self.modules)!=list:
-            self.modules=s.moduleIds
+            self.modules=self.s.moduleIds
         dic_reac={}
         for mod in self.modules:
             try:
-                dic=s.parse(s.get(mod))
+                dic=self.s.parse(self.s.get(mod))
                 reactions=dic['REACTION']
                 for reac in reactions:
                     teste=reactions[reac]
@@ -106,6 +106,15 @@ class MetabolicNetwork(MyGraph):
         return gr.printGraph()           
         
 
+    def modules_name(self):
+        if type(self.modules)!=list:
+            self.modules=self.s.moduleIds
+        for i in self.modules:
+            dic=self.s.parse(self.s.get(i))
+            name=dic["NAME"][0]
+            s="-".join([i,name])
+            print("\n".join([s]))
+
 
 
 if __name__ == "__main__":
@@ -114,24 +123,26 @@ if __name__ == "__main__":
     modules=[]
     while ans:
         print("""
-        1.Add module ID (ex:M00627)
-        2.Add All Modules
+        1.Add Module ID (ex:M00627)
+        2.Add All Modules IDs
         3.All picked
         
         """)
         ans=input("Choose an option? ")
         if ans=="1":
-            md=str(input("Which module? "))
+            md=str(input("Which Module ID? "))
             modules.append(md)
         elif ans=="2":
             modules=str("all")
+            ans=False
         elif ans=="3":
             ans=False
         else:
             print("\nInvalid") 
-
-
-
+    
+    mt=MetabolicNetwork(modules)
+    mt.modules_name()
+    mt.c_c_graph()
 
 
 
