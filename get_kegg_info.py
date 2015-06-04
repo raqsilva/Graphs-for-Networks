@@ -36,6 +36,7 @@ def teste2():
     s = KEGG()
     s.organism = "hsa"
     modules=s.moduleIds
+    print(modules[3])
     dic=s.parse(s.get(modules[3]))
     reactions=dic["REACTION"]
     dic_reac={}
@@ -190,7 +191,6 @@ def teste8():### reac-comp
 
 #print(teste6())  
 #teste8()
-
 
 
 
