@@ -129,6 +129,7 @@ class MetabolicNetwork(MyGraph):
                 s="-".join([key,comps[key]])
                 print("\n".join([s]))        
         
+    
         
         
         
@@ -158,6 +159,8 @@ if __name__ == "__main__":
     mt=MetabolicNetwork(modules)
     mt.c_c_graph()
     
+    ### Acrescentar all degrees
+    
     ans=True
     while ans:
         print("""
@@ -174,9 +177,8 @@ if __name__ == "__main__":
         elif ans=="3":
             ans=False
         else:
-            print("\nInvalid") 
-
-
+            print("\nInvalid")
+    
 
 
 
