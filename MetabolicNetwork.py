@@ -44,16 +44,16 @@ class MetabolicNetwork(MyGraph):
             if comp[c+1]=="+": 
                 try:
                     comp[c+5]=="+"
-                    s2=str(comp[c+4])+"+"+str(comp[c+6])
-                    s3=str(comp[c])+"+"+str(comp[c+2])
+                    s2="+".join([str(comp[c+4]), str(comp[c+6])])
+                    s3="+".join([str(comp[c]), str(comp[c+2])])
                     gr.addEdge(s3,s2)
                 except IndexError:
-                    s=str(comp[c])+"+"+str(comp[c+2])
+                    s="+".join([str(comp[c]), str(comp[c+2])])
                     gr.addEdge(s,comp[c+4])     
             elif comp[c+1]=="->":
                 try:
                     comp[c+3]=="+"
-                    s=str(comp[c+2])+"+"+str(comp[c+4])
+                    s="+".join([str(comp[c+2]), str(comp[c+4])])
                     gr.addEdge(comp[c],s)
                 except IndexError:
                     gr.addEdge(comp[c],comp[c+2])              
@@ -69,9 +69,9 @@ class MetabolicNetwork(MyGraph):
                     if v[len(v)-1]==m[0]:
                         gr.addEdge(k, r)
                 else:
-                    s=str(v[len(v)-3])+"+"+str(v[len(v)-1])
+                    s="+".join([str(v[len(v)-3]), str(v[len(v)-1])])
                     try:
-                        s2=str(m[0])+"+"+str(m[2])
+                        s2="+".join([str(m[0]), str(m[2])])
                         if s == s2:
                             gr.addEdge(k, r)
                     except IndexError:
@@ -92,9 +92,9 @@ class MetabolicNetwork(MyGraph):
                         gr.addEdge(sv, r)
                         gr.addEdge(r, sm)
                 else:
-                    s=str(v[len(v)-3])+"+"+str(v[len(v)-1])
+                    s="+".join([str(v[len(v)-3]), str(v[len(v)-1])])
                     try:
-                        s2=str(m[0])+"+"+str(m[2])
+                        s2="+".join([str(m[0]), str(m[2])])
                         if s == s2:
                             sv="".join(v)
                             sm="".join(m)
@@ -132,7 +132,6 @@ class MetabolicNetwork(MyGraph):
         
 
 if __name__ == "__main__":
-    #mod=input("Which module(s) pathway you want to use to create a network?")
     ans=True
     modules=[]
     while ans:
@@ -152,12 +151,28 @@ if __name__ == "__main__":
         elif ans=="3":
             ans=False
         else:
-            print("\nInvalid") 
+            print("\nInvalid")     
     
     mt=MetabolicNetwork(modules)
-    mt.compounds_name()
-    #mt.modules_name()
-    #mt.c_c_graph()
+    mt.c_c_graph()
+    
+    ans=True
+    while ans:
+        print("""
+        1.Modules name
+        2.Compounds name
+        3.Exit
+        
+        """)
+        ans=input("Choose an option? ")
+        if ans=="1":
+            mt.modules_name()
+        elif ans=="2":
+            mt.compounds_name()
+        elif ans=="3":
+            ans=False
+        else:
+            print("\nInvalid") 
 
 
 
