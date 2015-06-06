@@ -4,9 +4,9 @@ from MyGraph import MyGraph
 from bioservices import KEGG
 
 #networktype:
-#reaction-compound networks R-C
-#compound-compound networks C-C
-#reaction-reaction networks R-R
+#reaction-compound network R-C
+#compound-compound network C-C
+#reaction-reaction network R-R
 
 class MetabolicNetwork(MyGraph):
     def __init__(self, modules):    
@@ -14,7 +14,7 @@ class MetabolicNetwork(MyGraph):
         #self.net_type=networktype
         self.modules=modules
         self.s = KEGG()
-        self.s.organism = "hsa" # Homo Sapiens
+        self.s.organism = "hsa" # Homo sapiens
     
 
     def __kegg_dic(self):
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     while ans:
         print("""
         1.Add Module ID (ex:M00627)
-        2.Add All Modules IDs
+        2.Add All Modules IDs (Homo sapiens)
         3.All picked
         
         """)
