@@ -3,18 +3,20 @@
 from MyGraph import MyGraph
 from bioservices import KEGG
 
+#Metabolic Pathways
+
 #networktype:
 #reaction-compound network R-C
 #compound-compound network C-C
 #reaction-reaction network R-R
 
 class MetabolicNetwork(MyGraph):
-    def __init__(self, modules):    
+    def __init__(self, modules, organism="hsa"):    
         MyGraph.__init__(self,{})
         #self.net_type=networktype
         self.modules=modules
         self.s = KEGG()
-        self.s.organism = "hsa" # Homo sapiens
+        self.s.organism = organism # Homo sapiens as default
     
 
     def __kegg_dic(self):
