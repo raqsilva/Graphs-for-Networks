@@ -116,6 +116,20 @@ class MetabolicNetwork(MyGraph):
             print("\n".join([s]))
 
 
+    def compounds_name(self):        
+        if type(self.modules)!=list:
+            self.modules=self.s.moduleIds
+        for i in self.modules:
+            print(i)
+            dic=self.s.parse(self.s.get(i))
+            comps=dic["COMPOUND"]
+            for key in comps.keys():
+                s="-".join([key,comps[key]])
+                print("\n".join([s]))        
+        
+        
+        
+        
 
 if __name__ == "__main__":
     #mod=input("Which module(s) pathway you want to use to create a network?")
@@ -141,8 +155,9 @@ if __name__ == "__main__":
             print("\nInvalid") 
     
     mt=MetabolicNetwork(modules)
-    mt.modules_name()
-    mt.c_c_graph()
+    mt.compounds_name()
+    #mt.modules_name()
+    #mt.c_c_graph()
 
 
 
