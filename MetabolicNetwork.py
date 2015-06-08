@@ -211,7 +211,7 @@ if __name__ == "__main__":
         2.Compounds name
         3.Nodes Degree
         4.Clustering Coeficients
-        5.Connections between two nodes
+        5.Connections between two specific nodes
         6.Pathway Names
         10.Exit
         
@@ -225,8 +225,10 @@ if __name__ == "__main__":
             print(mt.nodes_degree())
         elif ans=="4":
             print(mt.clustering())
-        #elif ans=="5":
-            #print(mt.connections(n1, n2))
+        elif ans=="5":
+            n1=str(input("First node: "))
+            n2=str(input("Second node: "))
+            print(mt.connections(n1, n2))
         elif ans=="6":
             mt.pathway_name()
         elif ans=="10":
