@@ -138,6 +138,11 @@ class MetabolicNetwork(MyGraph):
     def clustering(self):
         gr=self.gr
         return gr.allClusteringCoefs()
+        
+        
+    def connections(self, n1, n2):
+        gr=self.gr
+        return gr.distance(n1, n2)
 
         
 
@@ -164,6 +169,7 @@ if __name__ == "__main__":
             print("\nInvalid")     
     
     mt=MetabolicNetwork(modules)
+    #print(mt.c_c_graph())
     
     ans=True
     while ans:
@@ -171,22 +177,21 @@ if __name__ == "__main__":
         1.Compound-Compound Network
         2.Reaction-Compound Network
         3.Reaction-Reaction Network
+        4.Exit
 
         """)
         ans=input("Choose an option? ")
         if ans=="1":
-            mt.c_c_graph()
-            ans=False
+            print(mt.c_c_graph())
         elif ans=="2":
-            mt.r_c_graph
-            ans=False
+            print(mt.r_c_graph())
         elif ans=="3":
-            mt.r_r_graph
+            print(mt.r_r_graph())
+        elif ans=="4":
             ans=False
         else:
             print("\nInvalid")
 
-    # mt.distance(v1,v2) ###
     
     ans=True
     while ans:
@@ -195,6 +200,7 @@ if __name__ == "__main__":
         2.Compounds name
         3.Nodes Degree
         4.Clustering Coeficients
+        5.Connections between two nodes
         10.Exit
         
         """)
@@ -204,16 +210,15 @@ if __name__ == "__main__":
         elif ans=="2":
             mt.compounds_name()
         elif ans=="3":
-            mt.nodes_degree()
+            print(mt.nodes_degree())
         elif ans=="4":
-            mt.clustering()
+            print(mt.clustering())
+        #elif ans=="5":
+            #print(mt.connections(n1, n2))
         elif ans=="10":
             ans=False
         else:
-            print("\nInvalid")
-    
-
-
+            print("\nInvalid")  
 
 
 
