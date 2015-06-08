@@ -13,7 +13,7 @@ from bioservices import KEGG
 class MetabolicNetwork(MyGraph):
     def __init__(self, modules, organism="hsa"):    
         MyGraph.__init__(self,{})
-        #self.net_type=networktype
+        self.gr=MyGraph()
         self.modules=modules
         self.s = KEGG()
         self.s.organism = organism # Homo sapiens as default
@@ -39,7 +39,7 @@ class MetabolicNetwork(MyGraph):
     
     def c_c_graph(self):### comp-comp
         dic_reac=self.__kegg_dic()
-        gr=MyGraph()
+        gr=self.gr
         for reac in dic_reac:
             comp=dic_reac[reac]
             c=0
@@ -64,7 +64,7 @@ class MetabolicNetwork(MyGraph):
         
     def r_r_graph(self):### reac-reac
         dic_reac=self.__kegg_dic()
-        gr=MyGraph()
+        gr=self.gr
         for k, v in dic_reac.items():
             for r, m in dic_reac.items():
                 if v[len(v)-2] == "->":
@@ -83,7 +83,7 @@ class MetabolicNetwork(MyGraph):
 
     def r_c_graph(self):### reac-comp
         dic_reac=self.__kegg_dic()
-        gr=MyGraph()
+        gr=self.gr
         for k, v in dic_reac.items():
             for r, m in dic_reac.items():
                 if v[len(v)-2] == "->":
@@ -130,8 +130,15 @@ class MetabolicNetwork(MyGraph):
                 print("\n".join([s]))        
         
     
+    def nodes_degree(self):
+        gr=self.gr
+        return gr.allDegrees()
         
-        
+    
+    def clustering(self):
+        gr=self.gr
+        return gr.allClusteringCoefs()
+
         
 
 if __name__ == "__main__":
@@ -157,16 +164,38 @@ if __name__ == "__main__":
             print("\nInvalid")     
     
     mt=MetabolicNetwork(modules)
-    mt.c_c_graph()
     
-    ### Acrescentar all degrees
+    ans=True
+    while ans:
+        print("""
+        1.Compound-Compound Network
+        2.Reaction-Compound Network
+        3.Reaction-Reaction Network
+
+        """)
+        ans=input("Choose an option? ")
+        if ans=="1":
+            mt.c_c_graph()
+            ans=False
+        elif ans=="2":
+            mt.r_c_graph
+            ans=False
+        elif ans=="3":
+            mt.r_r_graph
+            ans=False
+        else:
+            print("\nInvalid")
+
+    # mt.distance(v1,v2) ###
     
     ans=True
     while ans:
         print("""
         1.Modules name
         2.Compounds name
-        3.Exit
+        3.Nodes Degree
+        4.Clustering Coeficients
+        10.Exit
         
         """)
         ans=input("Choose an option? ")
@@ -175,6 +204,10 @@ if __name__ == "__main__":
         elif ans=="2":
             mt.compounds_name()
         elif ans=="3":
+            mt.nodes_degree()
+        elif ans=="4":
+            mt.clustering()
+        elif ans=="10":
             ans=False
         else:
             print("\nInvalid")
