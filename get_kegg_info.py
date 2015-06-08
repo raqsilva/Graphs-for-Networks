@@ -105,8 +105,8 @@ def teste4():
     dic=s.parse(s.get(modules[0]))
     compounds=dic["COMPOUND"]#dictionary with the names of the compounds {'C00074': 'Phosphoenolpyruvate',.....
     pathway=dic["PATHWAY"] # {'map00010': 'Glycolysis / Gluconeogenesis',......
-    module_name=dic["NAME"] #['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']}
-    return dic
+    module_name=dic["NAME"] #['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']
+    return pathway
 
 
 def teste5():
@@ -194,6 +194,6 @@ def teste8():### reac-comp
 #print(teste6())  
 #teste8()
 
-print(teste())
+print(teste4())
 
 

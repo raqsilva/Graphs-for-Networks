@@ -130,6 +130,17 @@ class MetabolicNetwork(MyGraph):
                 print("\n".join([s]))        
         
     
+    def pathway_name(self):
+        if type(self.modules)!=list:
+            self.modules=self.s.moduleIds
+        for i in self.modules:
+            dic=self.s.parse(self.s.get(i))
+            pathway=dic["PATHWAY"]
+            for key in pathway.keys():
+                s="-".join([key, pathway[key]])
+                print(s)
+        
+    
     def nodes_degree(self):
         gr=self.gr
         return gr.allDegrees()
@@ -201,6 +212,7 @@ if __name__ == "__main__":
         3.Nodes Degree
         4.Clustering Coeficients
         5.Connections between two nodes
+        6.Pathway Names
         10.Exit
         
         """)
@@ -215,6 +227,8 @@ if __name__ == "__main__":
             print(mt.clustering())
         #elif ans=="5":
             #print(mt.connections(n1, n2))
+        elif ans=="6":
+            mt.pathway_name()
         elif ans=="10":
             ans=False
         else:
