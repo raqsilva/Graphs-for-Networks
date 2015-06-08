@@ -30,7 +30,7 @@ def teste():
 #    dic=s.parse(s.get(modules[0]))
 #    compounds=dic["COMPOUND"]#dictionary with the names of the compounds {'C00074': 'Phosphoenolpyruvate',.....
 #    pathway=dic["PATHWAY"] # {'map00010': 'Glycolysis / Gluconeogenesis',......
-#    module_name=dic["NAME"] #['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']}
+#    module_name=dic["NAME"] #['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']
     return p #compounds, pathway, dic, module_name
 
 

@@ -113,7 +113,7 @@ class MetabolicNetwork(MyGraph):
             self.modules=self.s.moduleIds
         for i in self.modules:
             dic=self.s.parse(self.s.get(i))
-            name=dic["NAME"][0]
+            name=dic["NAME"][0]#['Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate']
             s="-".join([i,name])
             print("\n".join([s]))
 
@@ -124,7 +124,7 @@ class MetabolicNetwork(MyGraph):
         for i in self.modules:
             print(i)
             dic=self.s.parse(self.s.get(i))
-            comps=dic["COMPOUND"]
+            comps=dic["COMPOUND"]#dictionary with the names of the compounds {'C00074': 'Phosphoenolpyruvate',.....
             for key in comps.keys():
                 s="-".join([key,comps[key]])
                 print("\n".join([s]))        
@@ -135,7 +135,7 @@ class MetabolicNetwork(MyGraph):
             self.modules=self.s.moduleIds
         for i in self.modules:
             dic=self.s.parse(self.s.get(i))
-            pathway=dic["PATHWAY"]
+            pathway=dic["PATHWAY"]#{'map00010': 'Glycolysis / Gluconeogenesis',......
             for key in pathway.keys():
                 s="-".join([key, pathway[key]])
                 print(s)
@@ -180,7 +180,6 @@ if __name__ == "__main__":
             print("\nInvalid")     
     
     mt=MetabolicNetwork(modules)
-    #print(mt.c_c_graph())
     
     ans=True
     while ans:
