@@ -141,6 +141,7 @@ def teste6():
 
 ##### search by module name or pathway modules IDs 
 
+### as funcoes foram optimizadas usando join em vez de "+"
 
 def teste7():### reac-reac
     dic_reac=teste6()
